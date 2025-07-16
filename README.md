@@ -1,6 +1,7 @@
 # XMC4300 EtherCAT SSC
 
-This code example demonstrates the implementation of an EtherCAT slave node using the Beckhoff Slave Stack Code (SSC) Tool to generate the slave stack code for XMC4300 Relax EtherCAT Kit.
+This code example demonstrates the implementation of an EtherCAT slave node using the Beckhoff Slave Stack Code (SSC) Tool to generate the slave stack code for XMC4300 Relax EtherCAT Kit. Alternatively, XMC4800 IoT Connectivity Kit is also supported for this code example.
+
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-xmc43-ethcat-ssc)
 
@@ -24,12 +25,13 @@ This code example demonstrates the implementation of an EtherCAT slave node usin
 
 ## Supported kits (make variable 'TARGET')
 
-- [XMC4300 Relax EtherCAT Kit](https://www.infineon.com/cms/en/product/evaluation-boards/kit_xmc43_rlx_ecat_v2.1/) (`KIT_XMC43_RLX_ECAT_V2.1`) – Default value of `TARGET`
+- [XMC4300 Relax EtherCAT Kit](https://www.infineon.com/cms/en/product/evaluation-boards/kit_xmc43_rlx_ecat_v2.1/) (`KIT_XMC43_RLX_ECAT_V2.1`) – Default value of `TARGET` </br>
+- [XMC4800 IoT Connectivity Kit](https://www.infineon.com/evaluation-board/KIT-XMC48-IOT-AWS-WIFI) (`KIT_XMC48_IOT_AWS_WIFI`)
 
 
 ## Hardware setup
 
-Connect the Micro-USB cable to debug connector (X101) and a LAN cable from your master device to the IN port (X250) of the XMC4300 kit as shown in **Figure 1**. See the kit user guide to ensure that the board is configured correctly.
+Connect the Micro-USB cable to debug connector (X101) and a LAN cable from your master device to the IN port (X250) of the respective kit as shown in **Figure 1**. See the kit user guide to ensure that the board is configured correctly.
 
 **Figure 1. Kit setup**
 
@@ -56,7 +58,7 @@ The ModusToolbox&trade; tools package provides the Project Creator as both a GUI
 
    There are several ways to do this, including launching it from the dashboard or from inside the Eclipse IDE. For more details, see the [Project Creator user guide](https://www.infineon.com/ModusToolboxProjectCreator) (locally available at *{ModusToolbox&trade; install directory}/tools_{version}/project-creator/docs/project-creator.pdf*)
 
-2. On the **Choose Board Support Package (BSP)** page, select a kit supported by this code example. See [Supported kits](#supported-kits-make-variable-target)
+2. On the **Choose Board Support Package (BSP)** page, select the BSP of "KIT_XMC43_RELAX_ECAT_V1". See [Supported kits](#supported-kits-make-variable-target)
 
    > **Note:** To use this code example for a kit not listed here, you may need to update the source files. If the kit does not have the required resources, the application may not work
 
@@ -154,7 +156,7 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
    
    <img src="images/design.png" width="500" height="180">
 
-3. Start the SSC Tool and create a new project: **File** > **New**. Select **Custom** and click **Import**. Select the configuration xml file inside the example project (under **imports** > **mtb-xmc-ecat** > **ssc_config** folder) and import it. Select the Infineon device inside the dropdown list (Infineon XMC&trade; EtherCAT hardware) and click **OK**. Your project will be created
+3. Start the SSC Tool and create a new project: **File** > **New**. Select **Custom** and click **Import**. Select the configuration xml file inside the example project (under **imports** > **mtb-xmc-ecat** > **ssc_config** folder) and import it. Select the Infineon device inside the dropdown list (Infineon XMC&trade; EtherCAT hardware) and click **OK**. If a popped window appears and asks for "Add patch to project", select "No". Your project will be created
 
    **Figure 4. Project creation**
    
@@ -239,20 +241,27 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
 
 1. Use SEGGER J-Flash Lite to clean the flash of XMC4300, which is located in **Program Files** > **SEGGER** > **JLink** > **JFlashLite**. Open the tool, select the target device as **XMC4300-256**, and then click **Erase Chip** as shown in the following figure
 
-   **Figure 8. Flashing XMC4300**
+   **Figure 8. Cleaning XMC4300**
    
    <img src="images/jflash.png" width="300" height="178">
 
-2. Build the project. If there are any library-related issues, run the `make getlibs` command from the ModusToolbox&trade; IDE's terminal window, retry building, and then flash the code. If the previous steps are correct, the Ethernet IN-port should be flashing
+2. If you use the XMC4800 IoT Connectivity Kit, please go to the "Library Manager" from the IDE's Quick Panel window, and select "APP_KIT_XMC4800_IOT_WIFI" as the active BSP, then click "Update"
 
-   **Figure 9. Build the project**
+   **Figure 9. Selecting new BSP for XMC4800 IoT Kit**
+   
+   <img src="images/bsp.png" width="500" height="382">
+
+
+3. Build the project. If there are any library-related issues, run the `make getlibs` command from the ModusToolbox&trade; IDE's terminal window, retry building, and then flash the code. If the previous steps are correct, the Ethernet IN-port should be flashing
+
+   **Figure 10. Build the project**
    
    <img src="images/flash.png" width="300" height="272">
 
 
 3. Start the TwinCAT XAE Shell from the Windows start menu, create a new TwinCAT project, right-click **I/O-Devices**, and select **Add New Item**. Choose the **EtherCAT Master** option with your target type and click **Ok**
 
-   **Figure 10. EtherCAT Master**
+   **Figure 11. EtherCAT Master**
    
    <img src="images/master.png" width="500" height="284">
 
@@ -265,20 +274,20 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
 
 6. Observe that the slave appears as a node on the EtherCAT master bus. The RUN-LED is flashing indicating the PREOP state
 
-   **Figure 11. EtherCAT slave**
+   **Figure 12. EtherCAT slave**
    
    <img src="images/subd.png" width="300" height="236">
 
 7. **EtherCAT master view:** Inside the EtherCAT master online state, see the queued frames counting up, the connected slave and its PREOP state <br> **EtherCAT slave view:** The slave PREOP state is indicated within the TwinCAT system manager
 
-   **Figure 12. TwinCAT system manager**
+   **Figure 13. TwinCAT system manager**
    
    <img src="images/preop.png" width="800" height="408">
 
 
 8. Set the master device to free run mode by clicking the Toggle Free Run icon on the upper side
 
-   **Figure 13. Free run mode**
+   **Figure 14. Free run mode**
    
    <img src="images/free.png" width="500" height="296">
 
@@ -289,7 +298,7 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
 
 11. Right-click on the OUT_GEN_Bit1 of the slave node and select **Online Write '1'** inside the context menu. Change the value from '0' to '1' to switch on LED1 and '1' to '0' to switch off LED1. LED1 XMC4300 Relax EtherCAT Kit is turned on/off according to the OUT_GEN_Bit1 setting
 
-    **Figure 14. Switching LEDs**
+    **Figure 15. Switching LEDs**
    
     <img src="images/write.png" width="500" height="390">
 
@@ -327,8 +336,8 @@ The project uses a custom *design.modus* file for the EtherCAT configuration, wh
 Resources  | Links
 -----------|----------------------------------
 Code examples  | [Using ModusToolbox&trade;](https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software) on GitHub
-Device documentation  | [XMC4800 datasheet](https://www.infineon.com/dgdl/Infineon-XMC4700-XMC4800-DataSheet-v01_03-EN.pdf?fileId=5546d462518ffd850151908ea8db00b3) <br/> [XMC4800 reference manual](https://www.infineon.com/dgdl/Infineon-ReferenceManual_XMC4700_XMC4800-UM-v01_03-EN.pdf?fileId=5546d462518ffd850151904eb90c0044)
-Development kits | [XMC4300 Relax EtherCAT Kit](https://www.infineon.com/cms/en/product/evaluation-boards/kit_xmc43_rlx_ecat_v2.1/)
+Device documentation  | [XMC4300 datasheet](https://www.infineon.com/dgdl/Infineon-XMC4300-DataSheet-v01_03-EN.pdf?fileId=5546d462525dbac40152abc34fde16d8) - [XMC4800 datasheet](https://www.infineon.com/dgdl/Infineon-XMC4700-XMC4800-DataSheet-v01_03-EN.pdf?fileId=5546d462518ffd850151908ea8db00b3) <br/> [XMC4300 reference manual](https://www.infineon.com/dgdl/Infineon-XMC4300_ReferenceManual_v1.1.pdf-UM-v01_01-EN.pdf?fileId=5546d462525dbac40152f95e61ad6aff&da=t) - [XMC4800 reference manual](https://www.infineon.com/dgdl/Infineon-ReferenceManual_XMC4700_XMC4800-UM-v01_03-EN.pdf?fileId=5546d462518ffd850151904eb90c0044)
+Development kits | [XMC4300 Relax EtherCAT Kit](https://www.infineon.com/cms/en/product/evaluation-boards/kit_xmc43_rlx_ecat_v2.1/) <br/> [XMC4800 IoT FreeRTOS Connectivity Kit](https://www.infineon.com/evaluation-board/KIT-XMC48-IOT-AWS-WIFI)
 Libraries on GitHub | [mtb-xmclib-cat3](https://github.com/Infineon/mtb-xmclib-cat3) - XMC&trade; Peripheral Driver Library (XMCLib) <br/> [mtb-xmc-emeeprom](https://github.com/Infineon/mtb-xmc-emeeprom) - XMC&trade; emulated EEPROM middleware library <br/> [mtb-xmc-ecat](https://github.com/Infineon/mtb-xmc-ecat) - XMC&trade; EtherCAT middleware library
 Tools  | [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) – ModusToolbox&trade; software is a collection of easy-to-use libraries and tools enabling rapid development with Infineon MCUs for applications ranging from wireless and cloud-connected systems, edge AI/ML, embedded sense and control, to wired USB connectivity using PSOC&trade; Industrial/IoT MCUs, AIROC&trade; Wi-Fi and Bluetooth&reg; connectivity devices, XMC&trade; Industrial MCUs, and EZ-USB&trade;/EZ-PD&trade; wired connectivity controllers. ModusToolbox&trade; incorporates a comprehensive set of BSPs, HAL, libraries, configuration tools, and provides support for industry-standard IDEs to fast-track your embedded application development
 

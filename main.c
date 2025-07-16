@@ -46,6 +46,10 @@
 
 #define MAP2LEVEL(x) ((x==0)?XMC_GPIO_OUTPUT_LEVEL_LOW:XMC_GPIO_OUTPUT_LEVEL_HIGH)
 
+void process_app(TOBJ7000 *OUT_GENERIC, TOBJ6000 *IN_GENERIC);
+void SYNC0IRQHandler(void);
+void SYNC1IRQHandler(void);
+
 
 void process_app(TOBJ7000 *OUT_GENERIC, TOBJ6000 *IN_GENERIC)
 {
@@ -85,9 +89,18 @@ int main(void)
     }
 }
 
+void ERU1_0_IRQHandler(void)
+{
+	SYNC0IRQHandler();  // Call the Sync0 handler
+}
 void SYNC0IRQHandler(void)
 {
     Sync0_Isr();
+}
+
+void ERU1_2_IRQHandler(void)
+{
+    SYNC1IRQHandler();  // Call the Sync1 handler
 }
 
 void SYNC1IRQHandler(void)
