@@ -91,7 +91,7 @@ int main(void)
 
 void ERU1_0_IRQHandler(void)
 {
-	SYNC0IRQHandler();  // Call the Sync0 handler
+    SYNC0IRQHandler();  // Call the Sync0 handler
 }
 void SYNC0IRQHandler(void)
 {
