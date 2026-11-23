@@ -5,7 +5,7 @@ This code example demonstrates the implementation of an EtherCAT slave node usin
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-xmc43-ethcat-ssc)
 
-[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDE3MzMiLCJTcGVjIE51bWJlciI6IjAwMi00MTczMyIsIkRvYyBUaXRsZSI6IlhNQzQzMDAgRXRoZXJDQVQgU1NDIiwicmlkIjoic2lsc3VlcHVlcmJlcmtheSIsIkRvYyB2ZXJzaW9uIjoiMS4xLjAiLCJEb2MgTGFuZ3VhZ2UiOiJFbmdsaXNoIiwiRG9jIERpdmlzaW9uIjoiTUNEIiwiRG9jIEJVIjoiSUNXIiwiRG9jIEZhbWlseSI6IlBTT0MifQ==)
+[Provide feedback on this code example.](https://yourvoice.infineon.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDE3MzMiLCJTcGVjIE51bWJlciI6IjAwMi00MTczMyIsIkRvYyBUaXRsZSI6IlhNQzQzMDAgRXRoZXJDQVQgU1NDIiwicmlkIjoiYmVya2F5LnNpbHN1ZXB1ZXJAaW5maW5lb24uY29tIiwiRG9jIHZlcnNpb24iOiIxLjIuMCIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJJQ1ciLCJEb2MgRmFtaWx5IjoiUFNPQyJ9)
 
 ## Requirements
 
@@ -87,10 +87,10 @@ The 'project-creator-cli' tool can be used to create applications from a CLI ter
 
 Use a CLI terminal to invoke the 'project-creator-cli' tool. On Windows, use the command-line 'modus-shell' program provided in the ModusToolbox&trade; installation instead of a standard Windows command-line application. This shell provides access to all ModusToolbox&trade; tools. You can access it by typing "modus-shell" in the search box in the Windows menu. In Linux and macOS, you can use any terminal application.
 
-The following example clones the "[XMC4300 EtherCAT SSC](https://github.com/Infineon/mtb-example-xmc43-ethcat-ssc)" application with the desired name "Xmc4300EtherCatSSC" configured for the *KIT_XMC43_RLX_ECAT_V2.1* BSP into the specified working directory, *C:/mtb_projects*:
+The following example clones the "[XMC4300 EtherCAT SSC](https://github.com/Infineon/mtb-example-xmc43-ethcat-ssc)" application with the desired name "XMC4300EtherCATSSC" configured for the *KIT_XMC43_RLX_ECAT_V1* BSP into the specified working directory, *C:/mtb_projects*:
 
    ```
-   project-creator-cli --board-id KIT_XMC43_RLX_ECAT_V2.1 --app-id mtb-example-xmc43-ethcat-ssc --user-app-name Xmc4300EtherCatSSC --target-dir "C:/mtb_projects"
+   project-creator-cli --board-id KIT_XMC43_RLX_ECAT_V1 --app-id mtb-example-xmc43-ethcat-ssc --user-app-name XMC4300EtherCATSSC --target-dir "C:/mtb_projects"
    ```
 
 The 'project-creator-cli' tool has the following arguments:
@@ -373,6 +373,7 @@ Document title: *CE241733* – *XMC4300 EtherCAT SSC*
  ------- | ---------------------
  1.0.0   | New code example
  1.1.0   | Patch file added
+ 1.2.0   | Custom linker added for emulated EEPROM
 <br>
 
 
